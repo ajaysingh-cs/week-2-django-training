@@ -1,4 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from core.models import Product
 
 def home(request):
-    return HttpResponse("Welcome friends! Ye mera first Django page hai.")
+    products = Product.objects.all()
+
+    return render(request, 'home.html', {
+        'products': products
+    })
