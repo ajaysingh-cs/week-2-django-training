@@ -7,11 +7,33 @@
 
 <h1>Product List</h1>
 
-<ul>
-{% for product in products %}
-    <li>{{ product.name }} - ₹{{ product.price }}</li>
-{% endfor %}
-</ul>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>₹{{ product.price }}</td>
+        <td>
+            <a href="/update-product/{{ product.id }}/">Edit</a>
+             <a href="/delete-product/{{ product.id }}/">
+        Delete
+    </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="/add-product/">Add New Product</a>
 
 </body>
 </html>
