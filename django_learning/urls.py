@@ -19,6 +19,8 @@ from django.urls import path
 from .views import home
 from core.views import add_product, update_product, delete_product
 from django.contrib.auth import views as auth_views
+from core.views import add_product, update_product, delete_product, register
+from core.views import add_product, update_product, delete_product, register, custom_logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,9 +34,11 @@ urlpatterns = [
     name='login'
 ),
 
-path(
-    'logout/',
-    auth_views.LogoutView.as_view(),
-    name='logout'
-),
+#path(
+ #   'logout/',
+ #  auth_views.LogoutView.as_view(),
+ #   name='logout'
+#),
+path('register/', register, name='register'),
+path('logout/', custom_logout, name='logout'),
 ]
