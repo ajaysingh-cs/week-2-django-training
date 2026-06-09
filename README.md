@@ -1,65 +1,130 @@
-# Django Training Project
+# Week 2 Django & React Training
 
-A Django-based web application developed as part of internship training to learn backend development, database integration, CRUD operations, and user authentication.
+This repository contains the work completed during Week 2 of my internship training. The project covers Django backend development, user authentication, CRUD operations, and React frontend development.
 
-## Features Implemented
+## Technologies Used
+
+### Backend
+
+* Python
+* Django
+* SQLite (Development Database)
+* Django ORM
+
+### Frontend
+
+* React.js
+* Bootstrap 5
+* JavaScript
+* HTML/CSS
+
+### Tools
+
+* Git & GitHub
+* VS Code
+
+---
+
+## Django Features Implemented
 
 ### Product Management (CRUD)
 
-* Create Product
-* View Product List
-* Update Product Details
+* Add Product
+* View Products
+* Update Product
 * Delete Product
 
-### User Authentication
+### Authentication System
 
 * User Registration (Signup)
 * User Login
 * User Logout
-* Protected Routes using `login_required`
+* Protected Routes using `@login_required`
 
 ### Django Concepts Covered
 
-* MVT Architecture
 * Models
 * Views
 * Templates
 * URL Routing
-* Django ORM
 * Forms
 * Django Admin Panel
 * Authentication & Authorization
+* Django ORM
 
-## Tech Stack
+---
 
-* Python
-* Django
-* SQLite
-* HTML
+## React Features Implemented
+
+### Product Manager Application
+
+* Add Product
+* View Product List
+* Edit Product
+* Delete Product
+
+### React Concepts Covered
+
+* Components
+* JSX
+* State Management (`useState`)
+* Event Handling
+* Conditional Rendering
+* List Rendering using `map()`
+* Form Handling
+
+### UI Improvements
+
+* Bootstrap Integration
+* Responsive Layout
+* Styled Product Table
+* Professional CRUD Interface
+
+---
 
 ## Project Structure
 
-* Product Management Module
-* Authentication Module
-* Admin Panel
-* Dynamic Templates
+```text
+week_2_django_training/
+│
+├── django_learning/
+├── core/
+├── templates/
+├── react-training/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── manage.py
+└── README.md
+```
 
-## Learning Objectives
+---
 
-* Understand Django MVT Architecture
-* Perform CRUD Operations using Django ORM
-* Implement Authentication System
-* Work with Forms and Templates
-* Build a foundation for Full Stack Development
+## Learning Outcomes
+
+* Built complete CRUD applications using Django and React.
+* Implemented authentication and authorization in Django.
+* Learned React state management and component-based development.
+* Integrated Bootstrap for responsive UI development.
+* Gained hands-on experience with Git and GitHub workflow.
+
+---
 
 ## Future Enhancements
 
-* React Frontend Integration
-* Improved UI/UX
-* Search and Filter Functionality
-* REST API Integration
+* Convert Django backend to MySQL.
+* Build REST APIs.
+* Connect React frontend with Django backend.
+* Implement full-stack authentication.
+* Deploy the application.
+
+---
 
 ## Author
 
-Ajay Singh
+**Ajay Singh**
+
 MCA Student | University of Kota
+
+Aspiring Full Stack Developer
