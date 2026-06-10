@@ -3,6 +3,10 @@ from .models import Product
 from .forms import ProductForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
 
 
 def add_product(request):
@@ -53,3 +57,50 @@ def register(request):
 def custom_logout(request):
     logout(request)
     return redirect('/login/')
+
+from django.http import JsonResponse
+
+def api_test(request):
+    return JsonResponse({
+        "message": "Hello from Django API"
+    })
+
+
+def product_list(request):
+    products = list(
+        Product.objects.values(
+            "id",
+            "name",
+            "price"
+        )
+    )
+
+    return JsonResponse(products, safe=False)
+
+    
+@csrf_exempt
+def api_add_product(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        product = Product.objects.create(
+            name=data["name"],
+            price=data["price"]
+        )
+
+        return JsonResponse({
+            "id": product.id,
+            "name": product.name,
+            "price": product.price
+        })
+
+
+@csrf_exempt
+def api_delete_product(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+
+    return JsonResponse({
+        "message": "Product deleted successfully"
+    })
+    

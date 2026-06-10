@@ -1,84 +1,87 @@
-# Week 2 Django & React Training
+# Week 2 Django + React Training
 
-This repository contains the work completed during Week 2 of my internship training. The project covers Django backend development, user authentication, CRUD operations, and React frontend development.
+## Project Overview
+
+This project demonstrates integration between a React frontend and a Django backend. The application allows users to view, add, and delete products through a simple Product Management System.
+
+---
 
 ## Technologies Used
 
-### Backend
-
-* Python
-* Django
-* SQLite (Development Database)
-* Django ORM
-
 ### Frontend
 
-* React.js
-* Bootstrap 5
-* JavaScript
-* HTML/CSS
+* React
+* React Router DOM
+* Bootstrap
+* Fetch API
 
-### Tools
+### Backend
 
-* Git & GitHub
-* VS Code
-
----
-
-## Django Features Implemented
-
-### Product Management (CRUD)
-
-* Add Product
-* View Products
-* Update Product
-* Delete Product
-
-### Authentication System
-
-* User Registration (Signup)
-* User Login
-* User Logout
-* Protected Routes using `@login_required`
-
-### Django Concepts Covered
-
-* Models
-* Views
-* Templates
-* URL Routing
-* Forms
-* Django Admin Panel
-* Authentication & Authorization
+* Django
 * Django ORM
+* JSON Response API
+* django-cors-headers
+
+### Database
+
+* SQLite
 
 ---
 
-## React Features Implemented
+## Features Implemented
 
-### Product Manager Application
+### React
 
-* Add Product
-* View Product List
-* Edit Product
-* Delete Product
+* Component-based architecture
+* Routing using React Router
+* State management using useState
+* API calls using useEffect and Fetch API
+* Bootstrap UI integration
 
-### React Concepts Covered
+### Django
 
-* Components
-* JSX
-* State Management (`useState`)
-* Event Handling
-* Conditional Rendering
-* List Rendering using `map()`
-* Form Handling
+* Product Model
+* Product CRUD operations
+* API endpoints
+* CORS configuration
 
-### UI Improvements
+### Integration
 
-* Bootstrap Integration
-* Responsive Layout
-* Styled Product Table
-* Professional CRUD Interface
+* Fetch products from Django API
+* Add product from React UI
+* Delete product from React UI
+* Real-time UI updates after API operations
+
+---
+
+## API Endpoints
+
+### Get All Products
+
+```http
+GET /api/products/
+```
+
+### Add Product
+
+```http
+POST /api/add-product/
+```
+
+Request Body:
+
+```json
+{
+  "name": "Keyboard",
+  "price": 1200
+}
+```
+
+### Delete Product
+
+```http
+DELETE /api/delete-product/<id>/
+```
 
 ---
 
@@ -88,14 +91,21 @@ This repository contains the work completed during Week 2 of my internship train
 week_2_django_training/
 │
 ├── django_learning/
+│
 ├── core/
-├── templates/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│
 ├── react-training/
 │   ├── src/
-│   ├── public/
-│   └── package.json
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── About.jsx
+│   │   │   └── Products.jsx
+│   │   ├── components/
+│   │   └── main.jsx
 │
-├── manage.py
 └── README.md
 ```
 
@@ -103,28 +113,36 @@ week_2_django_training/
 
 ## Learning Outcomes
 
-* Built complete CRUD applications using Django and React.
-* Implemented authentication and authorization in Django.
-* Learned React state management and component-based development.
-* Integrated Bootstrap for responsive UI development.
-* Gained hands-on experience with Git and GitHub workflow.
+* Understanding React component architecture
+* Working with React Router
+* Using useState and useEffect hooks
+* Building Django APIs
+* Handling CORS in Django
+* Connecting React frontend with Django backend
+* Performing CRUD operations through APIs
 
 ---
 
-## Future Enhancements
+## Current Status
 
-* Convert Django backend to MySQL.
-* Build REST APIs.
-* Connect React frontend with Django backend.
-* Implement full-stack authentication.
-* Deploy the application.
+### Completed
+
+* React Setup
+* Django Setup
+* React Router
+* Product Listing
+* Add Product
+* Delete Product
+* Django API Integration
+* CORS Configuration
+
+### Next Improvements
+
+* Update Product Feature
+* Django REST Framework (DRF)
+* MySQL Integration
+* Authentication & Authorization
+* Search and Filter Functionality
 
 ---
 
-## Author
-
-**Ajay Singh**
-
-MCA Student | University of Kota
-
-Aspiring Full Stack Developer

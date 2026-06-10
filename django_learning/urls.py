@@ -21,6 +21,12 @@ from core.views import add_product, update_product, delete_product
 from django.contrib.auth import views as auth_views
 from core.views import add_product, update_product, delete_product, register
 from core.views import add_product, update_product, delete_product, register, custom_logout
+from core.views import api_test
+from core.views import (
+    product_list,
+    api_add_product,
+    api_delete_product
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,4 +47,8 @@ urlpatterns = [
 #),
 path('register/', register, name='register'),
 path('logout/', custom_logout, name='logout'),
+path('api/test/', api_test),
+path('api/products/', product_list),
+path('api/add-product/', api_add_product),
+path('api/delete-product/<int:id>/', api_delete_product),
 ]
