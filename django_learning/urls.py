@@ -21,12 +21,20 @@ from core.views import add_product, update_product, delete_product
 from django.contrib.auth import views as auth_views
 from core.views import add_product, update_product, delete_product, register
 from core.views import add_product, update_product, delete_product, register, custom_logout
+from core.views import ProductAPIView
 from core.views import api_test
+from core.views import RegisterAPIView
+from core.views import RegisterAPIView, DashboardAPIView
 from core.views import (
     product_list,
     api_add_product,
     api_delete_product
 )
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,4 +59,24 @@ path('api/test/', api_test),
 path('api/products/', product_list),
 path('api/add-product/', api_add_product),
 path('api/delete-product/<int:id>/', api_delete_product),
+path('api/drf-products/', ProductAPIView.as_view()),
+path(
+    'api/token/',
+    TokenObtainPairView.as_view(),
+    name='token_obtain_pair'
+),
+
+path(
+    'api/token/refresh/',
+    TokenRefreshView.as_view(),
+    name='token_refresh'
+),
+path(
+    'api/register/',
+    RegisterAPIView.as_view()
+),
+path(
+    'api/dashboard/',
+    DashboardAPIView.as_view()
+),
 ]

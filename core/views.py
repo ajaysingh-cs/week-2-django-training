@@ -6,7 +6,13 @@ from django.contrib.auth import logout
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
+from .serializers import ProductSerializer
+from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 
 
 def add_product(request):
@@ -104,3 +110,61 @@ def api_delete_product(request, id):
         "message": "Product deleted successfully"
     })
     
+class ProductAPIView(APIView):
+
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+        
+
+class RegisterAPIView(APIView):
+
+    def post(self, request):
+
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        if User.objects.filter(username=username).exists():
+
+            return Response(
+                {"error": "Username already exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        User.objects.create_user(
+            username=username,
+            password=password
+        )
+
+        return Response(
+            {"message": "User created successfully"},
+            status=status.HTTP_201_CREATED
+        )
+        
+class DashboardAPIView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        return Response({
+            "message": f"Welcome {request.user.username}",
+            "authenticated": True
+        })
