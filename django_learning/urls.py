@@ -25,6 +25,9 @@ from core.views import ProductAPIView
 from core.views import api_test
 from core.views import RegisterAPIView
 from core.views import RegisterAPIView, DashboardAPIView
+from rest_framework.routers import DefaultRouter
+from core.views import ProductViewSet
+from django.urls import path, include
 from core.views import (
     product_list,
     api_add_product,
@@ -34,7 +37,11 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
+router = DefaultRouter()
+router.register(
+    r'viewset-products',
+    ProductViewSet
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -79,4 +86,5 @@ path(
     'api/dashboard/',
     DashboardAPIView.as_view()
 ),
+path('', include(router.urls)),
 ]

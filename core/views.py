@@ -13,7 +13,7 @@ from rest_framework import status
 from .serializers import ProductSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework import viewsets
 
 def add_product(request):
     if request.method == 'POST':
@@ -167,4 +167,8 @@ class DashboardAPIView(APIView):
         return Response({
             "message": f"Welcome {request.user.username}",
             "authenticated": True
-        })
+        }) 
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

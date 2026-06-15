@@ -1,83 +1,148 @@
-# Week 2 Django + React Training
+# Django REST Framework Authentication Dashboard System
 
 ## Project Overview
 
-This project demonstrates integration between a React frontend and a Django backend. The application allows users to view, add, and delete products through a simple Product Management System.
+This project is a full-stack authentication dashboard system built using Django REST Framework (DRF) and React.
+
+The project demonstrates API development, JWT authentication, protected routes, React integration, and CRUD operations.
 
 ---
 
-## Technologies Used
-
-### Frontend
-
-* React
-* React Router DOM
-* Bootstrap
-* Fetch API
+## Tech Stack
 
 ### Backend
 
+* Python
 * Django
-* Django ORM
-* JSON Response API
-* django-cors-headers
-
-### Database
-
+* Django REST Framework (DRF)
+* Simple JWT
 * SQLite
+
+### Frontend
+
+* React.js
+* React Router DOM
+* Bootstrap
 
 ---
 
-## Features Implemented
+## Features
 
-### React
+### Authentication
 
-* Component-based architecture
-* Routing using React Router
-* State management using useState
-* API calls using useEffect and Fetch API
-* Bootstrap UI integration
+* User Registration
+* User Login
+* JWT Authentication
+* Protected Dashboard
+* Logout Functionality
+* Protected Routes
 
-### Django
+### Product Management
 
-* Product Model
-* Product CRUD operations
-* API endpoints
-* CORS configuration
+* View Products
+* Add Product
+* Delete Product
+* Product APIs
 
-### Integration
+### DRF Concepts Implemented
 
-* Fetch products from Django API
-* Add product from React UI
-* Delete product from React UI
-* Real-time UI updates after API operations
+* Serializers
+* APIView
+* ViewSets
+* Routers
+* JWT Authentication
+* CRUD APIs
+
+---
+
+## Project Structure
+
+Backend:
+
+```text
+django_learning/
+│
+├── core/
+│   ├── models.py
+│   ├── views.py
+│   ├── serializers.py
+│   ├── forms.py
+│
+├── django_learning/
+│   ├── settings.py
+│   ├── urls.py
+│
+└── db.sqlite3
+```
+
+Frontend:
+
+```text
+react-training/
+│
+├── src/
+│   ├── Pages/
+│   │   ├── Home.jsx
+│   │   ├── Products.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Dashboard.jsx
+│   │
+│   ├── components/
+│   │   ├── ProductForm.jsx
+│   │   ├── ProductTable.jsx
+│   │   └── ProtectedRoute.jsx
+│   │
+│   └── App.jsx
+```
 
 ---
 
 ## API Endpoints
 
-### Get All Products
+### Authentication APIs
+
+#### Register User
+
+```http
+POST /api/register/
+```
+
+#### Login User
+
+```http
+POST /api/token/
+```
+
+#### Refresh Token
+
+```http
+POST /api/token/refresh/
+```
+
+#### Dashboard API
+
+```http
+GET /api/dashboard/
+```
+
+---
+
+### Product APIs
+
+#### Get Products
 
 ```http
 GET /api/products/
 ```
 
-### Add Product
+#### Add Product
 
 ```http
 POST /api/add-product/
 ```
 
-Request Body:
-
-```json
-{
-  "name": "Keyboard",
-  "price": 1200
-}
-```
-
-### Delete Product
+#### Delete Product
 
 ```http
 DELETE /api/delete-product/<id>/
@@ -85,64 +150,88 @@ DELETE /api/delete-product/<id>/
 
 ---
 
-## Project Structure
+### ViewSet APIs
+
+#### Product ViewSet
+
+```http
+GET /viewset-products/
+POST /viewset-products/
+GET /viewset-products/<id>/
+PUT /viewset-products/<id>/
+DELETE /viewset-products/<id>/
+```
+
+---
+
+## Authentication Flow
 
 ```text
-week_2_django_training/
-│
-├── django_learning/
-│
-├── core/
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│
-├── react-training/
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── About.jsx
-│   │   │   └── Products.jsx
-│   │   ├── components/
-│   │   └── main.jsx
-│
-└── README.md
+Register
+    ↓
+Login
+    ↓
+JWT Access Token Generated
+    ↓
+Token Stored in localStorage
+    ↓
+Access Protected Dashboard
+    ↓
+Logout
+    ↓
+Token Removed
 ```
+
+---
+
+## DRF Concepts Used
+
+### Serializer
+
+Converts Django model objects into JSON format and validates incoming API data.
+
+### APIView
+
+Provides full control over HTTP methods such as GET and POST.
+
+### ViewSet
+
+Automatically provides CRUD operations with less code.
+
+### Router
+
+Automatically generates API URLs for ViewSets.
+
+### JWT Authentication
+
+Used for secure user authentication without server-side sessions.
+
+### IsAuthenticated
+
+Protects APIs so only authenticated users can access them.
 
 ---
 
 ## Learning Outcomes
 
-* Understanding React component architecture
-* Working with React Router
-* Using useState and useEffect hooks
-* Building Django APIs
-* Handling CORS in Django
-* Connecting React frontend with Django backend
-* Performing CRUD operations through APIs
+* Built REST APIs using Django REST Framework.
+* Implemented JWT-based authentication.
+* Integrated React frontend with Django backend.
+* Created protected routes in React.
+* Learned APIView, ViewSets, Routers, and Serializers.
+* Developed a complete authentication workflow.
 
 ---
 
-## Current Status
+## Repository
 
-### Completed
-
-* React Setup
-* Django Setup
-* React Router
-* Product Listing
-* Add Product
-* Delete Product
-* Django API Integration
-* CORS Configuration
-
-### Next Improvements
-
-* Update Product Feature
-* Django REST Framework (DRF)
-* MySQL Integration
-* Authentication & Authorization
-* Search and Filter Functionality
+GitHub Repository:
+https://github.com/ajaysingh-cs/week-2-django-training
 
 ---
+
+## Author
+
+Ajay Singh
+
 

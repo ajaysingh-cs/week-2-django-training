@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     const response = await fetch(
-      "http://127.0.0.1:8000/api/token/",
+      "http://127.0.0.1:8000/api/register/",
       {
         method: "POST",
         headers: {
@@ -21,21 +21,16 @@ function Login() {
 
     const data = await response.json();
 
-    console.log(data);
+    alert(data.message || data.error);
 
-    if (data.access) {
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
-      alert("Login Successful");
-      window.location.href = "/dashboard";
-    } else {
-      alert("Invalid Credentials");
+    if (response.ok) {
+      window.location.href = "/login";
     }
   };
 
   return (
     <div className="container mt-5">
-      <h2>Login</h2>
+      <h2>Register</h2>
 
       <input
         type="text"
@@ -52,13 +47,13 @@ function Login() {
       />
 
       <button
-        className="btn btn-primary"
-        onClick={handleLogin}
+        className="btn btn-success"
+        onClick={handleRegister}
       >
-        Login
+        Register
       </button>
     </div>
   );
 }
 
-export default Login;
+export default Register;
