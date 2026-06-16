@@ -4,6 +4,7 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
   const fetchProducts = () => {
     fetch("http://127.0.0.1:8000/api/products/")
@@ -18,7 +19,31 @@ function Products() {
   }, []);
 
   const addProduct = () => {
-    if (!name || !price) return;
+  if (!name || !price) return;
+
+  if (editingId) {
+    fetch(
+      `http://127.0.0.1:8000/viewset-products/${editingId}/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+       body: JSON.stringify({
+       name,
+       price: Number(price),
+       }),
+      }
+    )
+      .then((response) => response.json())
+      .then(() => {
+        setName("");
+        setPrice("");
+        setEditingId(null);
+        fetchProducts();
+      });
+
+  } else {
 
     fetch("http://127.0.0.1:8000/api/add-product/", {
       method: "POST",
@@ -27,7 +52,7 @@ function Products() {
       },
       body: JSON.stringify({
         name,
-        price,
+        price: Number(price)
       }),
     })
       .then((response) => response.json())
@@ -36,7 +61,8 @@ function Products() {
         setPrice("");
         fetchProducts();
       });
-  };
+  }
+};
 
   const deleteProduct = (id) => {
     fetch(`http://127.0.0.1:8000/api/delete-product/${id}/`)
@@ -45,6 +71,12 @@ function Products() {
         fetchProducts();
       });
   };
+
+  const editProduct = (product) => {
+  setEditingId(product.id);
+  setName(product.name);
+  setPrice(product.price);
+};
 
   return (
     <div className="container mt-5">
@@ -69,11 +101,11 @@ function Products() {
         />
 
         <button
-          className="btn btn-primary"
-          onClick={addProduct}
-        >
-          Add Product
-        </button>
+  className="btn btn-primary"
+  onClick={addProduct}
+>
+  {editingId ? "Update Product" : "Add Product"}
+</button>
       </div>
 
       <table className="table table-bordered">
@@ -93,7 +125,15 @@ function Products() {
               <td>{product.name}</td>
               <td>₹{product.price}</td>
 
+              
+
               <td>
+                <button
+  className="btn btn-warning btn-sm me-2"
+  onClick={() => editProduct(product)}
+>
+  Edit
+</button>
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() =>

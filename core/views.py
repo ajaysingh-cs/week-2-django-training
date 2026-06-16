@@ -110,6 +110,7 @@ def api_delete_product(request, id):
         "message": "Product deleted successfully"
     })
     
+
 class ProductAPIView(APIView):
 
     def get(self, request):
