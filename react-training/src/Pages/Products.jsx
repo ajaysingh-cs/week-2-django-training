@@ -5,6 +5,7 @@ function Products() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [search, setSearch] = useState("");
 
   const fetchProducts = () => {
     fetch("http://127.0.0.1:8000/api/products/")
@@ -65,12 +66,21 @@ function Products() {
 };
 
   const deleteProduct = (id) => {
-    fetch(`http://127.0.0.1:8000/api/delete-product/${id}/`)
-      .then((response) => response.json())
-      .then(() => {
-        fetchProducts();
-      });
-  };
+
+  const confirmDelete = window.confirm(
+    "Sahi m delete krna chahta h tu ?"
+  );
+
+  if (!confirmDelete) return;
+
+  fetch(
+    `http://127.0.0.1:8000/api/delete-product/${id}/`
+  )
+    .then((response) => response.json())
+    .then(() => {
+      fetchProducts();
+    });
+};
 
   const editProduct = (product) => {
   setEditingId(product.id);
@@ -81,7 +91,9 @@ function Products() {
   return (
     <div className="container mt-5">
 
-      <h1 className="mb-4">Products Page</h1>
+      <h1 className="mb-4">
+       Products ({products.length})
+      </h1>
 
       <div className="card p-3 mb-4">
         <input
@@ -99,6 +111,15 @@ function Products() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+
+        <input
+         type="text"
+         className="form-control mb-3"
+         placeholder="Search Product..."
+         value={search}
+         onChange={(e) => setSearch(e.target.value)}
+        />
+
 
         <button
   className="btn btn-primary"
@@ -119,7 +140,13 @@ function Products() {
         </thead>
 
         <tbody>
-          {products.map((product) => (
+          {products
+  .filter((product) =>
+    product.name
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  )
+  .map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>

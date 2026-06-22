@@ -165,10 +165,26 @@ class DashboardAPIView(APIView):
 
     def get(self, request):
 
+        total_products = Product.objects.count()
+
+        total_value = sum(
+            product.price
+            for product in Product.objects.all()
+        )
+
+        average_price = (
+            total_value / total_products
+            if total_products > 0
+            else 0
+        )
+
         return Response({
             "message": f"Welcome {request.user.username}",
-            "authenticated": True
-        }) 
+            "authenticated": True,
+            "total_products": total_products,
+            "total_value": total_value,
+            "average_price": round(average_price, 2)
+        })
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
